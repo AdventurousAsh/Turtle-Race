@@ -27,40 +27,45 @@ blue.teleport(-270, 82)
 purple.color("purple")
 purple.teleport(-270, 130)
 
-turtleList = [red, orange, yellow, green, blue, purple]
+turtleDict = {
+"red":red,
+"orange":orange,
+"yellow" : yellow, 
+"green" : green, 
+"blue" : blue,
+"purple" : purple,
+}
 
-for shell in turtleList:
-    shell.shape("turtle")
+for key in turtleDict:
+    turtleDict[key].shape("turtle")
 
 
 def moveTurtles(turtles):
     #Shuffles the turtles
     x, y = 0, 0
-    random.shuffle(turtles)
-    for shell in turtles:
+    for key in turtles:
         distance = random.randint(0,10)
-        shell.forward(distance)
+        turtles[key].forward(distance)
 
-        x, y = shell.position()
+        x, y = turtles[key].position()
         if x > 270:
             return False
     return True
 
 def checkWinner(turtles):
     x, y = 0, 0
-    for shell in turtles:
-        x, y = shell.position()
+    for key in turtles:
+        x, y = turtles[key].position()
         if x > 270:
-            return shell
+            return key
     
     return None
 
-while checkWinner(turtleList) == None:
-    moveTurtles(turtleList)
+while checkWinner(turtleDict) == None:
+    moveTurtles(turtleDict)
 
-
-
-
+winner = checkWinner(turtleDict)
+print(winner)
 
 #Exits the screen on click
 screen.exitonclick()
