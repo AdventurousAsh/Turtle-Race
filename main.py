@@ -4,6 +4,7 @@ import random
 #Creates the screen object
 screen = turtle.Screen()
 screen.setup(600, 300)
+screen.title("Turtle Races")
 
 #Creates all of the turtles 
 red = turtle.Turtle()
@@ -38,7 +39,9 @@ turtleDict = {
 
 for key in turtleDict:
     turtleDict[key].shape("turtle")
+    turtleDict[key].penup()
 
+playerGuess = turtle.textinput("Turtle Races", "Please input color of turtle you think will win.")
 
 def moveTurtles(turtles):
     #Shuffles the turtles
@@ -65,7 +68,11 @@ while checkWinner(turtleDict) == None:
     moveTurtles(turtleDict)
 
 winner = checkWinner(turtleDict)
-print(winner)
+
+if playerGuess.lower() == winner:
+    turtle.textinput("Turtle Races", ("You were right! " + winner + " won!!!!"))
+else:
+    turtle.textinput("Turtle Races", ("You lost. You guessed " + playerGuess + " but " + winner + " won. Press enter to exit."))
 
 #Exits the screen on click
 screen.exitonclick()
